@@ -6,6 +6,7 @@ import { pool } from "./config/db.js";
 import productosRoutes from "./routes/productos.routes.js";
 import clientesRoutes from "./routes/clientes.routes.js";
 import transportesRoutes from "./routes/transportes.routes.js";
+import cuentaCorrienteRoutes from "./routes/cuentaCorriente.routes.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use("/eventos", eventosRoutes);
 app.use("/productos", productosRoutes);
 app.use("/clientes", clientesRoutes);
 app.use("/transportes", transportesRoutes);
+app.use("/cuenta-corriente", cuentaCorrienteRoutes);
 
 const PORT = process.env.PORT || 3001;
 
