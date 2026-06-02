@@ -11,7 +11,11 @@ export async function listarClientes(req, res) {
         email AS "Email",
         ciudad AS "Ciudad",
         direccion AS "Direccion",
-        direccion_envio AS "DireccionEnvio"
+        direccion_envio AS "DireccionEnvio",
+        direccion_facturacion AS "DireccionFacturacion",
+        pref_factura AS "PrefFactura",
+        tiene_cuenta_corriente AS "TieneCuentaCorriente",
+        notas AS "Notas"
       FROM clientes
       ORDER BY nombre_razon_social ASC
     `);
@@ -37,9 +41,13 @@ export async function crearCliente(req, res) {
         email,
         ciudad,
         direccion,
-        direccion_envio
+        direccion_envio,
+        direccion_facturacion,
+        pref_factura,
+        tiene_cuenta_corriente,
+        notas
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
       RETURNING *
       `,
       [
@@ -50,7 +58,11 @@ export async function crearCliente(req, res) {
         c.Email || "",
         c.Ciudad || "",
         c.Direccion || "",
-        c.DireccionEnvio || "",
+        c.DireccionEnvio || c.Direccion || "",
+        c.DireccionFacturacion || c.Direccion || "",
+        c.PrefFactura || "A",
+        c.TieneCuentaCorriente === true,
+        c.Notas || "",
       ]
     );
 
@@ -78,8 +90,12 @@ export async function actualizarCliente(req, res) {
         ciudad = $6,
         direccion = $7,
         direccion_envio = $8,
+        direccion_facturacion = $9,
+        pref_factura = $10,
+        tiene_cuenta_corriente = $11,
+        notas = $12,
         updated_at = NOW()
-      WHERE cliente_id = $9
+      WHERE cliente_id = $13
       RETURNING *
       `,
       [
@@ -90,7 +106,11 @@ export async function actualizarCliente(req, res) {
         c.Email || "",
         c.Ciudad || "",
         c.Direccion || "",
-        c.DireccionEnvio || "",
+        c.DireccionEnvio || c.Direccion || "",
+        c.DireccionFacturacion || c.Direccion || "",
+        c.PrefFactura || "A",
+        c.TieneCuentaCorriente === true,
+        c.Notas || "",
         id,
       ]
     );
