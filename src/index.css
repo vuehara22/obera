@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+html, body, #root { height: 100%; }
+
+/* Base */
+html, body, #root { height: 100%; }
+
+:root{
+  /* Azul oscuro base (fondo) */
+  --app-bg: #0b1b3a;     /* navy */
+  --app-bg-2: #0a1630;   /* más oscuro */
+  --app-border: rgba(255,255,255,.10);
+  --app-card: rgba(255,255,255,.92);
+}
+
+body{
+  background: radial-gradient(1200px 800px at 10% 0%, rgba(59,130,246,.20), transparent 55%),
+              radial-gradient(900px 600px at 95% 10%, rgba(147,51,234,.14), transparent 55%),
+              linear-gradient(180deg, var(--app-bg) 0%, var(--app-bg-2) 100%);
+  color: #e5e7eb;
+}
